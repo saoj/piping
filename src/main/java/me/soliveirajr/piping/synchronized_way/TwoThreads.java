@@ -16,20 +16,20 @@
 package me.soliveirajr.piping.synchronized_way;
 
 public class TwoThreads {
-	
-	public static void main(String[] args) throws InterruptedException {
-		
-		final long iterations = 10_000_000;
-		
-		ThreadA threadA = new ThreadA(iterations);
-		ThreadB threadB = new ThreadB(iterations, threadA);
-		
-		threadA.start();
-		threadB.start();
-		
-		threadA.join();
-		threadB.join();
-		
-		System.out.println(threadA);
-	}
+    
+    public static void main(String[] args) throws InterruptedException {
+        
+        final long iterations = 10_000_000;
+        
+        ThreadA threadA = new ThreadA(iterations);
+        ThreadB threadB = new ThreadB(iterations, threadA);
+        
+        threadA.start();
+        threadB.start();
+        
+        threadA.join();
+        threadB.join();
+        
+        System.out.println(threadA);
+    }
 }

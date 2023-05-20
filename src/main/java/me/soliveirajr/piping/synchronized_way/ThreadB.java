@@ -16,25 +16,25 @@
 package me.soliveirajr.piping.synchronized_way;
 
 public class ThreadB extends Thread {
-	
-	private final ThreadA threadA;
-	private final long iterations;
-	
-	public ThreadB(long iterations, ThreadA threadA) {
-		this.iterations = iterations;
-		this.threadA = threadA;
-	}
-	
-	@Override
-	public void run() {
-		long i = 0;
-		while(i++ < iterations) {
-			long x = i % 10;
-			if (x % 2 == 0) {
-				threadA.decrementBy(x);
-			} else {
-				threadA.incrementBy(2 * x);
-			}
-		}
-	}
+    
+    private final ThreadA threadA;
+    private final long iterations;
+    
+    public ThreadB(long iterations, ThreadA threadA) {
+        this.iterations = iterations;
+        this.threadA = threadA;
+    }
+    
+    @Override
+    public void run() {
+        long i = 0;
+        while(i++ < iterations) {
+            long x = i % 10;
+            if (x % 2 == 0) {
+                threadA.decrementBy(x);
+            } else {
+                threadA.incrementBy(2 * x);
+            }
+        }
+    }
 }

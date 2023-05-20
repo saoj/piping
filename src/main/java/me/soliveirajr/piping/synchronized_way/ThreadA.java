@@ -16,40 +16,40 @@
 package me.soliveirajr.piping.synchronized_way;
 
 public class ThreadA extends Thread {
-	
-	private long counter;
-	private long operations = 0;
-	private final long iterations;
-	
-	public ThreadA(long iterations) {
-		this.iterations = iterations;
-	}
-	
-	public synchronized void incrementBy(long x) {
-		counter += x;
-		operations++;
-	}
-	
-	public synchronized void decrementBy(long x) {
-		counter -= x;
-		operations++;
-	}
-	
-	@Override
-	public void run() {
-		long i = 0;
-		while(i++ < iterations) {
-			long x = i % 10;
-			if (x % 2 == 0) {
-				incrementBy(2 * x);
-			} else {
-				decrementBy(x);
-			}
-		}
-	}
+    
+    private long counter;
+    private long operations = 0;
+    private final long iterations;
+    
+    public ThreadA(long iterations) {
+        this.iterations = iterations;
+    }
+    
+    public synchronized void incrementBy(long x) {
+        counter += x;
+        operations++;
+    }
+    
+    public synchronized void decrementBy(long x) {
+        counter -= x;
+        operations++;
+    }
+    
+    @Override
+    public void run() {
+        long i = 0;
+        while(i++ < iterations) {
+            long x = i % 10;
+            if (x % 2 == 0) {
+                incrementBy(2 * x);
+            } else {
+                decrementBy(x);
+            }
+        }
+    }
 
-	@Override
-	public String toString() {
-		return ThreadA.class.getSimpleName() + " with counter=" + counter + " after " + operations + " operations";
-	}
+    @Override
+    public String toString() {
+        return ThreadA.class.getSimpleName() + " with counter=" + counter + " after " + operations + " operations";
+    }
 }

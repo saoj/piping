@@ -20,44 +20,44 @@ import me.soliveirajr.piping.LinkedNonBlockingPipe;
 import me.soliveirajr.piping.Pipe;
 
 public class TwoThreads {
-	
-	public static void main(String[] args) throws InterruptedException {
-		
-		final long iterations = 10_000_000;
-		
-		{
-		
-			Pipe<OpMessage> pipe = new LinkedBlockingPipe<OpMessage>(1024, OpMessage.class);
-			
-			ThreadA threadA = new ThreadA(iterations, pipe);
-			ThreadB threadB = new ThreadB(iterations, pipe);
-			
-			threadA.start();
-			threadB.start();
-			
-			threadA.join();
-			threadB.join();
-			
-			System.out.println(threadA);
-		}
-		
-		System.out.println("\nNow if you use a non-blocking pipe of course it fails...\n");
-		
-		{
-			
-			Pipe<OpMessage> pipe = new LinkedNonBlockingPipe<OpMessage>(1024, OpMessage.class);
-			
-			ThreadA threadA = new ThreadA(iterations, pipe);
-			ThreadB threadB = new ThreadB(iterations, pipe);
-			
-			threadA.start();
-			threadB.start();
-			
-			threadA.join();
-			threadB.join();
-			
-			System.out.println(threadA);
-		}
-		
-	}
+    
+    public static void main(String[] args) throws InterruptedException {
+        
+        final long iterations = 10_000_000;
+        
+        {
+        
+            Pipe<OpMessage> pipe = new LinkedBlockingPipe<OpMessage>(1024, OpMessage.class);
+            
+            ThreadA threadA = new ThreadA(iterations, pipe);
+            ThreadB threadB = new ThreadB(iterations, pipe);
+            
+            threadA.start();
+            threadB.start();
+            
+            threadA.join();
+            threadB.join();
+            
+            System.out.println(threadA);
+        }
+        
+        System.out.println("\nNow if you use a non-blocking pipe of course it fails...\n");
+        
+        {
+            
+            Pipe<OpMessage> pipe = new LinkedNonBlockingPipe<OpMessage>(1024, OpMessage.class);
+            
+            ThreadA threadA = new ThreadA(iterations, pipe);
+            ThreadB threadB = new ThreadB(iterations, pipe);
+            
+            threadA.start();
+            threadB.start();
+            
+            threadA.join();
+            threadB.join();
+            
+            System.out.println(threadA);
+        }
+        
+    }
 }

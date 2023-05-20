@@ -19,8 +19,8 @@ import me.soliveirajr.piping.Transferable;
 
 public class AckMessage implements Transferable<AckMessage> {
 
-	@Override
-	public void transferTo(AckMessage dest) {
-		// NOOP
-	}
+    @Override
+    public void transferTo(AckMessage dest) {
+        // NOOP
+    }
 }

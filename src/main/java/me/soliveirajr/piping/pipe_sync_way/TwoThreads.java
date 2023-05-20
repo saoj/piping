@@ -20,46 +20,46 @@ import me.soliveirajr.piping.LinkedNonBlockingPipe;
 import me.soliveirajr.piping.Pipe;
 
 public class TwoThreads {
-	
-	public static void main(String[] args) throws InterruptedException {
-		
-		final long iterations = 10_000_000;
-		
-		{
-		
-			Pipe<OpMessage> inPipe = new LinkedBlockingPipe<OpMessage>(1024, OpMessage.class);
-			Pipe<AckMessage> outPipe = new LinkedBlockingPipe<AckMessage>(1, AckMessage.class);
-			
-			ThreadA threadA = new ThreadA(iterations, outPipe, inPipe);
-			ThreadB threadB = new ThreadB(iterations, inPipe, outPipe);
-			
-			threadA.start();
-			threadB.start();
-			
-			threadA.join();
-			threadB.join();
-			
-			System.out.println(threadA);
-		}
-		
-		System.out.println("\nNow if you use a non-blocking pipe of course it fails...\n");
-		
-		{
-			
-			Pipe<OpMessage> inPipe = new LinkedNonBlockingPipe<OpMessage>(1024, OpMessage.class);
-			Pipe<AckMessage> outPipe = new LinkedNonBlockingPipe<AckMessage>(1, AckMessage.class);
-			
-			ThreadA threadA = new ThreadA(iterations, outPipe, inPipe);
-			ThreadB threadB = new ThreadB(iterations, inPipe, outPipe);
-			
-			threadA.start();
-			threadB.start();
-			
-			threadA.join();
-			threadB.join();
-			
-			System.out.println(threadA);
-		}
-		
-	}
+    
+    public static void main(String[] args) throws InterruptedException {
+        
+        final long iterations = 10_000_000;
+        
+        {
+        
+            Pipe<OpMessage> inPipe = new LinkedBlockingPipe<OpMessage>(1024, OpMessage.class);
+            Pipe<AckMessage> outPipe = new LinkedBlockingPipe<AckMessage>(1, AckMessage.class);
+            
+            ThreadA threadA = new ThreadA(iterations, outPipe, inPipe);
+            ThreadB threadB = new ThreadB(iterations, inPipe, outPipe);
+            
+            threadA.start();
+            threadB.start();
+            
+            threadA.join();
+            threadB.join();
+            
+            System.out.println(threadA);
+        }
+        
+        System.out.println("\nNow if you use a non-blocking pipe of course it fails...\n");
+        
+        {
+            
+            Pipe<OpMessage> inPipe = new LinkedNonBlockingPipe<OpMessage>(1024, OpMessage.class);
+            Pipe<AckMessage> outPipe = new LinkedNonBlockingPipe<AckMessage>(1, AckMessage.class);
+            
+            ThreadA threadA = new ThreadA(iterations, outPipe, inPipe);
+            ThreadB threadB = new ThreadB(iterations, inPipe, outPipe);
+            
+            threadA.start();
+            threadB.start();
+            
+            threadA.join();
+            threadB.join();
+            
+            System.out.println(threadA);
+        }
+        
+    }
 }

@@ -18,37 +18,37 @@ package me.soliveirajr.piping.pipe_sync_way;
 import me.soliveirajr.piping.Pipe;
 
 public class ThreadB extends Thread {
-	
-	private final long iterations;
-	private final Pipe<OpMessage> outPipe;
-	private final Pipe<AckMessage> inPipe;
-	private final OpMessage toSend = new OpMessage();
-	private final AckMessage ack = new AckMessage();
-	
-	public ThreadB(long iterations, Pipe<OpMessage> outPipe, Pipe<AckMessage> inPipe) {
-		this.iterations = iterations;
-		this.outPipe = outPipe;
-		this.inPipe = inPipe;
-	}
-	
-	@Override
-	public void run() {
-		long i = 0;
-		while(i++ < iterations) {
-			long x = i % 10;
-			if (x % 2 == 0) {
-				toSend.op = OpMessage.Op.SUB;
-				toSend.value = x;
-			} else {
-				toSend.op = OpMessage.Op.ADD;
-				toSend.value = 2 *x;
-			}
-			if (!outPipe.dispatch(toSend)) {
-				throw new RuntimeException("Cannot send operation!");
-			}
-			if (!inPipe.receive(ack)) {
-				throw new RuntimeException("Cannot receive ack!");
-			}
-		}
-	}
+    
+    private final long iterations;
+    private final Pipe<OpMessage> outPipe;
+    private final Pipe<AckMessage> inPipe;
+    private final OpMessage toSend = new OpMessage();
+    private final AckMessage ack = new AckMessage();
+    
+    public ThreadB(long iterations, Pipe<OpMessage> outPipe, Pipe<AckMessage> inPipe) {
+        this.iterations = iterations;
+        this.outPipe = outPipe;
+        this.inPipe = inPipe;
+    }
+    
+    @Override
+    public void run() {
+        long i = 0;
+        while(i++ < iterations) {
+            long x = i % 10;
+            if (x % 2 == 0) {
+                toSend.op = OpMessage.Op.SUB;
+                toSend.value = x;
+            } else {
+                toSend.op = OpMessage.Op.ADD;
+                toSend.value = 2 *x;
+            }
+            if (!outPipe.dispatch(toSend)) {
+                throw new RuntimeException("Cannot send operation!");
+            }
+            if (!inPipe.receive(ack)) {
+                throw new RuntimeException("Cannot receive ack!");
+            }
+        }
+    }
 }

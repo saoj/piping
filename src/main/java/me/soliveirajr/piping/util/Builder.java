@@ -17,5 +17,5 @@ package me.soliveirajr.piping.util;
 
 public interface Builder<E> {
 
-	public E newInstance();
+    public E newInstance();
 }

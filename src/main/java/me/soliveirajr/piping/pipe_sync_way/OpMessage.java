@@ -19,14 +19,14 @@ import me.soliveirajr.piping.Transferable;
 
 public class OpMessage implements Transferable<OpMessage> {
 
-	public static enum Op { ADD, SUB }
-	
-	public Op op;
-	public long value;
-	
-	@Override
-	public void transferTo(OpMessage dest) {
-		dest.op = this.op;
-		dest.value = this.value;
-	}
+    public static enum Op { ADD, SUB }
+    
+    public Op op;
+    public long value;
+    
+    @Override
+    public void transferTo(OpMessage dest) {
+        dest.op = this.op;
+        dest.value = this.value;
+    }
 }

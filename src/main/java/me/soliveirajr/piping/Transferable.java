@@ -19,12 +19,12 @@ package me.soliveirajr.piping;
  * A contract for mutable objects to transfer their contents/data to another instance.
  */
 public interface Transferable<E> {
-	
+    
     /**
      * Transfer all my contents/data to another instance
      * 
      * @param dest the destination instance that will receive the contents/data
      */
-	public void transferTo(E dest);
-	
+    public void transferTo(E dest);
+    
 }

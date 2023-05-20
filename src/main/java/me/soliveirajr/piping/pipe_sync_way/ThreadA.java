@@ -18,58 +18,58 @@ package me.soliveirajr.piping.pipe_sync_way;
 import me.soliveirajr.piping.Pipe;
 
 public class ThreadA extends Thread {
-	
-	private long counter;
-	private long operations = 0;
-	private final long iterations;
-	private final Pipe<OpMessage> inPipe;
-	private final Pipe<AckMessage> outPipe;
-	private final OpMessage toReceive = new OpMessage();
-	private final AckMessage ack = new AckMessage();
-	
-	public ThreadA(long iterations, Pipe<AckMessage> outPipe, Pipe<OpMessage> inPipe) {
-		this.iterations = iterations;
-		this.outPipe = outPipe;
-		this.inPipe = inPipe;
-	}
-	
-	public void incrementBy(long x) {
-		counter += x;
-		operations++;
-	}
-	
-	public void decrementBy(long x) {
-		counter -= x;
-		operations++;
-	}
-	
-	@Override
-	public void run() {
-		long i = 0;
-		while(i++ < iterations) {
-			long x = i % 10;
-			if (x % 2 == 0) {
-				incrementBy(2 * x);
-			} else {
-				decrementBy(x);
-			}
-			if (inPipe.receive(toReceive)) {
-				if (toReceive.op == OpMessage.Op.ADD) {
-					incrementBy(toReceive.value);
-				} else if (toReceive.op == OpMessage.Op.SUB) {
-					decrementBy(toReceive.value);
-				} else {
-					throw new IllegalStateException("Don't know this op: " + toReceive.op);
-				}
-			}
-			if (!outPipe.dispatch(ack)) {
-				throw new RuntimeException("Cannot send ack!");
-			}
-		}
-	}
+    
+    private long counter;
+    private long operations = 0;
+    private final long iterations;
+    private final Pipe<OpMessage> inPipe;
+    private final Pipe<AckMessage> outPipe;
+    private final OpMessage toReceive = new OpMessage();
+    private final AckMessage ack = new AckMessage();
+    
+    public ThreadA(long iterations, Pipe<AckMessage> outPipe, Pipe<OpMessage> inPipe) {
+        this.iterations = iterations;
+        this.outPipe = outPipe;
+        this.inPipe = inPipe;
+    }
+    
+    public void incrementBy(long x) {
+        counter += x;
+        operations++;
+    }
+    
+    public void decrementBy(long x) {
+        counter -= x;
+        operations++;
+    }
+    
+    @Override
+    public void run() {
+        long i = 0;
+        while(i++ < iterations) {
+            long x = i % 10;
+            if (x % 2 == 0) {
+                incrementBy(2 * x);
+            } else {
+                decrementBy(x);
+            }
+            if (inPipe.receive(toReceive)) {
+                if (toReceive.op == OpMessage.Op.ADD) {
+                    incrementBy(toReceive.value);
+                } else if (toReceive.op == OpMessage.Op.SUB) {
+                    decrementBy(toReceive.value);
+                } else {
+                    throw new IllegalStateException("Don't know this op: " + toReceive.op);
+                }
+            }
+            if (!outPipe.dispatch(ack)) {
+                throw new RuntimeException("Cannot send ack!");
+            }
+        }
+    }
 
-	@Override
-	public String toString() {
-		return ThreadA.class.getSimpleName() + " with counter=" + counter + " after " + operations + " operations";
-	}
+    @Override
+    public String toString() {
+        return ThreadA.class.getSimpleName() + " with counter=" + counter + " after " + operations + " operations";
+    }
 }

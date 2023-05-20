@@ -21,20 +21,20 @@ package me.soliveirajr.piping;
  * @param <E> the message you want to send
  */
 public interface Pipe<E extends Transferable<E>> {
-	
+    
     /**
      * Dispatch a message through the pipe
      * 
      * @param message the message to dispatch
      * @return true if the message was able to be sent or false if the pipe is full
      */
-	public boolean dispatch(E message);
-	
+    public boolean dispatch(E message);
+    
     /**
      * Receive a message through the pipe
      * 
      * @param message the message to receive
      * @return true if the message was received or false if the pipe is empty
      */
-	public boolean receive(E message);
+    public boolean receive(E message);
 }
