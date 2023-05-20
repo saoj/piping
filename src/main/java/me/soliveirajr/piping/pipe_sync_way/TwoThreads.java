@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package me.soliveirajr.piping.pipe_async_way;
+package me.soliveirajr.piping.pipe_sync_way;
 
 import me.soliveirajr.piping.LinkedBlockingPipe;
 import me.soliveirajr.piping.LinkedNonBlockingPipe;
@@ -27,10 +27,11 @@ public class TwoThreads {
 		
 		{
 		
-			Pipe<OpMessage> pipe = new LinkedBlockingPipe<OpMessage>(1024, OpMessage.class);
+			Pipe<OpMessage> inPipe = new LinkedBlockingPipe<OpMessage>(1024, OpMessage.class);
+			Pipe<AckMessage> outPipe = new LinkedBlockingPipe<AckMessage>(1, AckMessage.class);
 			
-			ThreadA threadA = new ThreadA(iterations, pipe);
-			ThreadB threadB = new ThreadB(iterations, pipe);
+			ThreadA threadA = new ThreadA(iterations, outPipe, inPipe);
+			ThreadB threadB = new ThreadB(iterations, inPipe, outPipe);
 			
 			threadA.start();
 			threadB.start();
@@ -45,10 +46,11 @@ public class TwoThreads {
 		
 		{
 			
-			Pipe<OpMessage> pipe = new LinkedNonBlockingPipe<OpMessage>(1024, OpMessage.class);
+			Pipe<OpMessage> inPipe = new LinkedNonBlockingPipe<OpMessage>(1024, OpMessage.class);
+			Pipe<AckMessage> outPipe = new LinkedNonBlockingPipe<AckMessage>(1, AckMessage.class);
 			
-			ThreadA threadA = new ThreadA(iterations, pipe);
-			ThreadB threadB = new ThreadB(iterations, pipe);
+			ThreadA threadA = new ThreadA(iterations, outPipe, inPipe);
+			ThreadB threadB = new ThreadB(iterations, inPipe, outPipe);
 			
 			threadA.start();
 			threadB.start();
