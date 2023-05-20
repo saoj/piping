@@ -13,7 +13,7 @@
  * either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-package me.soliveirajr.piping.pipe_way;
+package me.soliveirajr.piping.pipea_async_way;
 
 import me.soliveirajr.piping.Transferable;
 
