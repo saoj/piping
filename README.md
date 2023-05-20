@@ -227,7 +227,6 @@ public static void main(String[] args) throws InterruptedException {
         
         System.out.println(threadA);
     }
-    
 }
 ```
 
@@ -394,7 +393,6 @@ public class TwoThreads {
             
             System.out.println(threadA);
         }
-        
     }
 }
 ```
