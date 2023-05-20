@@ -1,5 +1,5 @@
 # Thread Piping
-A different way to do multithreading programming using messages through pipes. I guess what I'm calling _Thread Piping_ is actually the [Actor Model](https://en.wikipedia.org/wiki/Actor_model). But I still think **Thread Piping** sounds fun/cool 😃
+A different way to do multithreading programming using messages through pipes. I guess what I'm calling _Thread Piping_ is actually the [Actor Model](https://en.wikipedia.org/wiki/Actor_model). But I still think **Thread Piping** sounds fun/cool 😃 My take is that by using _Thread Piping_ (and exchanging messages between threads) there is no need for state synchronizations through locks. Then if you can make your inter-thread queue (i.e. PIPE) lock-free you are on for some serious non-locking ultra-low-latency thread interaction.
 
 ## Synchronized Way
 Using the `synchronized` keyword to lock around shared variables (i.e. shared state).
