@@ -88,7 +88,7 @@ public static void main(String[] args) throws InterruptedException {
 ```
 
 ## Pipe Asynchronous Way
-Using a single pipe to send messages from thread B to thread A. No synchronization around shared variables is neeeded.
+Using a single pipe to send messages from thread B to thread A. No synchronization around shared variables is needed.
 
 ```java
 public class OpMessage implements Transferable<OpMessage> {
@@ -232,7 +232,7 @@ public static void main(String[] args) throws InterruptedException {
 ```
 
 ## Pipe Synchronous Way
-Using two pipes: one to send operations and another one to receive acks. No synchronization around shared variables is neeeded.
+Using two pipes: one to send operations and another one to receive acks. No synchronization around shared variables is needed.
 ```java
 public class OpMessage implements Transferable<OpMessage> {
 
