@@ -58,6 +58,5 @@ public class TwoThreads {
             
             System.out.println(threadA);
         }
-        
     }
 }
