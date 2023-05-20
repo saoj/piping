@@ -1,5 +1,5 @@
 # Thread Piping
-A different way to do multithreading programming using messages through pipes.
+A different way to do multithreading programming using messages through pipes. I guess what I'm calling _Thread Piping_ is actually the [Actor Model](https://en.wikipedia.org/wiki/Actor_model). But I still think **Thread Piping** is cool.
 
 ## Synchronized Way
 Using the `synchronized` keyword to lock around shared variables (i.e. shared state).
